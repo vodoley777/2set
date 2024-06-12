@@ -19,6 +19,14 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       - run:
+          name: Set up GitHub token
+          command: |
+            echo "export GITHUB_TOKEN=$GITHUB_TOKEN" >> $BASH_ENV
+      - run:
+          name: Use GitHub token
+          command: |
+            curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user
+      - run:
           name: "Say hello"
           command: "echo Hello, World!"
 
